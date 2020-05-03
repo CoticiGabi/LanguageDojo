@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notifications-->
+        <scene sceneID="eLJ-xz-jNe">
+            <objects>
+                <viewController storyboardIdentifier="Notifications" id="AX7-DN-Dtr" customClass="NotificationsViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Oq3-IV-JfT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="s5E-9p-lki"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notifications" id="ed7-Am-GqW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8hZ-AQ-Xw6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2670" y="761"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="V5A-Bc-KJi">
+            <objects>
+                <navigationController storyboardIdentifier="NotificationsNav" automaticallyAdjustsScrollViewInsets="NO" id="t58-cj-Ow8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="notification_icon" selectedImage="notification_icon_selected" id="Fr2-sC-pcg">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lQW-bz-RRw">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="AX7-DN-Dtr" kind="relationship" relationship="rootViewController" id="h6z-x7-5G9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="23V-Rn-Abe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2670" y="5"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="notification_icon" width="25" height="25"/>
+        <image name="notification_icon_selected" width="25" height="25"/>
+    </resources>
+</document>

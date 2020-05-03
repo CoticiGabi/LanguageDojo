@@ -23,6 +23,11 @@ class SignUpViewController: UIViewController {
         present(signInViewController, animated: true, completion: nil)
     }
     
+    @IBAction func signUpButton(_ sender: Any) {
+        let tabBarController = storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+        tabBarController.modalPresentationStyle = .fullScreen
+        present(tabBarController, animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
