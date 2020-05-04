@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060459AA245EB17A00F45A56 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 060459A9245EB17A00F45A56 /* GoogleService-Info.plist */; };
 		069505882459A04700702C2A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069505872459A04700702C2A /* AppDelegate.swift */; };
 		0695058A2459A04700702C2A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069505892459A04700702C2A /* SceneDelegate.swift */; };
 		0695058F2459A04700702C2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0695058D2459A04700702C2A /* Main.storyboard */; };
@@ -23,9 +24,11 @@
 		069F4DE3245D4C0400EE6C6E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE2245D4C0400EE6C6E /* AddViewController.swift */; };
 		069F4DE5245D4C0C00EE6C6E /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */; };
 		069F4DE7245D4C1400EE6C6E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */; };
+		B9CF9AC5C410656967F2BF6C /* Pods_LanguageDojo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		060459A9245EB17A00F45A56 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		069505842459A04700702C2A /* LanguageDojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguageDojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		069505872459A04700702C2A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		069505892459A04700702C2A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,6 +47,9 @@
 		069F4DE2245D4C0400EE6C6E /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguageDojo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7541208249EDF87389FDA64C /* Pods-LanguageDojo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguageDojo.release.xcconfig"; path = "Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo.release.xcconfig"; sourceTree = "<group>"; };
+		92988670CAF3C78C5CE1AD28 /* Pods-LanguageDojo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguageDojo.debug.xcconfig"; path = "Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,17 +57,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B9CF9AC5C410656967F2BF6C /* Pods_LanguageDojo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060459AB245EB1EC00F45A56 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				069F4DDE245B12ED00EE6C6E /* SignUpViewController.swift */,
+				069F4DDC245B029200EE6C6E /* SignInViewController.swift */,
+				069F4DE0245D4BF600EE6C6E /* HomeViewController.swift */,
+				069F4DE2245D4C0400EE6C6E /* AddViewController.swift */,
+				069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */,
+				069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		060459AC245EB21300F45A56 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				069E639F245DA5FC009DC782 /* Profile.storyboard */,
+				069E639C245DA5B9009DC782 /* Notifications.storyboard */,
+				069E639A245DA4C2009DC782 /* Post.storyboard */,
+				069E6397245DA486009DC782 /* Home.storyboard */,
+				069E6394245D9D75009DC782 /* Start.storyboard */,
+				0695058D2459A04700702C2A /* Main.storyboard */,
+				069505922459A04900702C2A /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
 		0695057B2459A04700702C2A = {
 			isa = PBXGroup;
 			children = (
 				069505862459A04700702C2A /* LanguageDojo */,
 				069505852459A04700702C2A /* Products */,
+				33200222F2608C57EB7805CC /* Pods */,
+				5D5D1A769D1E0ADC9F8F1248 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,25 +112,33 @@
 		069505862459A04700702C2A /* LanguageDojo */ = {
 			isa = PBXGroup;
 			children = (
-				069E639F245DA5FC009DC782 /* Profile.storyboard */,
-				069E639C245DA5B9009DC782 /* Notifications.storyboard */,
-				069E639A245DA4C2009DC782 /* Post.storyboard */,
-				069E6397245DA486009DC782 /* Home.storyboard */,
-				069E6394245D9D75009DC782 /* Start.storyboard */,
+				060459A9245EB17A00F45A56 /* GoogleService-Info.plist */,
+				060459AC245EB21300F45A56 /* Storyboard */,
 				069505872459A04700702C2A /* AppDelegate.swift */,
-				069F4DDE245B12ED00EE6C6E /* SignUpViewController.swift */,
-				069F4DDC245B029200EE6C6E /* SignInViewController.swift */,
-				069F4DE0245D4BF600EE6C6E /* HomeViewController.swift */,
-				069F4DE2245D4C0400EE6C6E /* AddViewController.swift */,
-				069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */,
-				069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */,
+				060459AB245EB1EC00F45A56 /* ViewController */,
 				069505892459A04700702C2A /* SceneDelegate.swift */,
-				0695058D2459A04700702C2A /* Main.storyboard */,
 				069505902459A04900702C2A /* Assets.xcassets */,
-				069505922459A04900702C2A /* LaunchScreen.storyboard */,
 				069505952459A04900702C2A /* Info.plist */,
 			);
 			path = LanguageDojo;
+			sourceTree = "<group>";
+		};
+		33200222F2608C57EB7805CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				92988670CAF3C78C5CE1AD28 /* Pods-LanguageDojo.debug.xcconfig */,
+				7541208249EDF87389FDA64C /* Pods-LanguageDojo.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5D5D1A769D1E0ADC9F8F1248 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,9 +148,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 069505982459A04900702C2A /* Build configuration list for PBXNativeTarget "LanguageDojo" */;
 			buildPhases = (
+				D0F0D019AF0BE52CDC631392 /* [CP] Check Pods Manifest.lock */,
 				069505802459A04700702C2A /* Sources */,
 				069505812459A04700702C2A /* Frameworks */,
 				069505822459A04700702C2A /* Resources */,
+				7BC1A3795137F562F2340EE9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,6 +203,7 @@
 			files = (
 				069505942459A04900702C2A /* LaunchScreen.storyboard in Resources */,
 				069E6399245DA486009DC782 /* Home.storyboard in Resources */,
+				060459AA245EB17A00F45A56 /* GoogleService-Info.plist in Resources */,
 				069E63A0245DA5FC009DC782 /* Profile.storyboard in Resources */,
 				069E6396245D9D75009DC782 /* Start.storyboard in Resources */,
 				069505912459A04900702C2A /* Assets.xcassets in Resources */,
@@ -167,6 +214,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7BC1A3795137F562F2340EE9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0F0D019AF0BE52CDC631392 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LanguageDojo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		069505802459A04700702C2A /* Sources */ = {
@@ -346,6 +435,7 @@
 		};
 		069505992459A04900702C2A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92988670CAF3C78C5CE1AD28 /* Pods-LanguageDojo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -363,6 +453,7 @@
 		};
 		0695059A2459A04900702C2A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7541208249EDF87389FDA64C /* Pods-LanguageDojo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>949344286194-fiahirmg6goc3u3a8ifbptd9ea1ltao8.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.949344286194-fiahirmg6goc3u3a8ifbptd9ea1ltao8</string>
+	<key>API_KEY</key>
+	<string>AIzaSyApwfrD-_E2XIZZxsaYsS0GioGf-C9giPk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>949344286194</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.CoticiGabriel.LanguageDojo</string>
+	<key>PROJECT_ID</key>
+	<string>languagedojo-bab50</string>
+	<key>STORAGE_BUCKET</key>
+	<string>languagedojo-bab50.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:949344286194:ios:45f414e2cc980978ade76b</string>
+	<key>DATABASE_URL</key>
+	<string>https://languagedojo-bab50.firebaseio.com</string>
+</dict>
+</plist>
