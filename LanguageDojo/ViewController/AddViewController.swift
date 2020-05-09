@@ -7,14 +7,26 @@
 //
 
 import UIKit
+import DropDown
+import FirebaseDatabase
+import FirebaseAuth
 
 class AddViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var wordCounterTextView: UITextField!
     @IBOutlet weak var customView: UIView!
     
+    @IBOutlet weak var postButton: UIBarButtonItem!
+    @IBOutlet weak var selectLanguageButton: UIButton!
+    let rightBarDropDown = DropDown()
+
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var circularProfileImage: UIImageView!
+    var selectedImage: UIImage?
+    let tableView = UITableView()
+    var selectedButton = UIButton()
+    
+    let transparentView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,13 +40,64 @@ class AddViewController: UIViewController, UITextViewDelegate {
         textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
 //
 //        customView.backgroundColor = UIColor.red
+        customView.layer.borderWidth = 1.0
+        customView.layer.borderColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0).cgColor
         wordCounterTextView.layer.cornerRadius = 10.0
         wordCounterTextView.layer.borderWidth = 0.0
         wordCounterTextView.layer.borderColor = UIColor.red.cgColor
+        wordCounterTextView.isEnabled = false
 
         textView.inputAccessoryView = customView
         self.view.bringSubviewToFront(textView)
+        
+        
+        //Dropdown
+        
+        rightBarDropDown.anchorView = selectLanguageButton
+        rightBarDropDown.dataSource = ["English", "Spanish"]
+        rightBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
 
+        
+    }
+    
+    //POST button
+    
+    @IBAction func postButton_TouchUpInside(_ sender: Any) {
+        sendDataToDatabase()
+        
+         let storyboard = UIStoryboard(name: "Start", bundle: nil)
+         let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+        homeViewController.modalPresentationStyle = .fullScreen
+        self.present(homeViewController, animated: true, completion: nil)    }
+    
+    //Save the post ot database
+    func sendDataToDatabase() {
+        let ref = Database.database().reference()
+        let postsReference = ref.child("posts")
+        let newPostId = postsReference.childByAutoId().key!
+        let newPostReference = postsReference.child(newPostId)
+        newPostReference.setValue(["language": self.selectLanguageButton.currentTitle, "message": textView.text!])
+    }
+    
+    // Select the langauge fot he post
+    @IBAction func onClickSelectLanguage(_ sender: Any) {
+
+           rightBarDropDown.selectionAction = { (index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+            self.selectLanguageButton.setTitle(item, for: UIControl.State.normal)
+        }
+
+           rightBarDropDown.width = 140
+           rightBarDropDown.bottomOffset = CGPoint(x: 0, y:(rightBarDropDown.anchorView?.plainView.bounds.height)!)
+           rightBarDropDown.show()
+        }
+    
+
+    
+    @IBAction func photoPickerButton(_ sender: Any) {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
     }
     
     
@@ -114,4 +177,21 @@ class AddViewController: UIViewController, UITextViewDelegate {
         }
     }
 
+}
+
+extension AddViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("Did finish picking Media!AKJHGAKJHAGKJHAGKJHAGKJAHGKAJHGAKJHGAKJHGAKJHAG")
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImage = image
+        }
+    }
+}
+
+extension NSLayoutConstraint {
+
+    override public var description: String {
+        let id = identifier ?? ""
+        return "id: \(id), constant: \(constant)" //you may print whatever you want here
+    }
 }

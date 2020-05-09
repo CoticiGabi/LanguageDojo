@@ -1,4 +1,5 @@
 PODS:
+  - DropDown (2.3.13)
   - Firebase/Analytics (6.23.0):
     - Firebase/Core
   - Firebase/Auth (6.23.0):
@@ -89,6 +90,7 @@ PODS:
   - PromisesObjC (1.2.8)
 
 DEPENDENCIES:
+  - DropDown
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -97,6 +99,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - DropDown
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -117,6 +120,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   Firebase: 585ae467b3edda6a5444e788fda6888f024d8d6f
   FirebaseAnalytics: 558f7a03d19de451093032c806f39d5f9dff096e
   FirebaseAuth: e50319ecc114acf93c2b9581e15d6604ddd7eeb2
@@ -136,6 +140,6 @@ SPEC CHECKSUMS:
   ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
 
-PODFILE CHECKSUM: 1659b126ff5348fc7a9b1cb57b57364feb373d39
+PODFILE CHECKSUM: 177631eed3adde85e2e41a6d5ef45a3d3d753b49
 
 COCOAPODS: 1.9.1
