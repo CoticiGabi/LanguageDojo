@@ -82,9 +82,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     let uid = Auth?.user.uid
                     let newUserRef = userRef.child(uid!)
                     newUserRef.setValue(["username": self.usernameTextField.text!, "email": self.emailTextField.text!])
-                    let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-                    tabBarController.modalPresentationStyle = .fullScreen
-                    self.present(tabBarController, animated: true, completion: nil)
+                    let welcomeController = self.storyboard?.instantiateViewController(withIdentifier: "welcome") as! UIViewController
+                    welcomeController.modalPresentationStyle = .fullScreen
+                    self.present(welcomeController, animated: true, completion: nil)
                 }
             }
         }

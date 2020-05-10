@@ -24,6 +24,7 @@
 		069F4DE3245D4C0400EE6C6E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE2245D4C0400EE6C6E /* AddViewController.swift */; };
 		069F4DE5245D4C0C00EE6C6E /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */; };
 		069F4DE7245D4C1400EE6C6E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */; };
+		06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */; };
 		B9CF9AC5C410656967F2BF6C /* Pods_LanguageDojo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,7 @@
 		069F4DE2245D4C0400EE6C6E /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguageDojo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7541208249EDF87389FDA64C /* Pods-LanguageDojo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguageDojo.release.xcconfig"; path = "Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo.release.xcconfig"; sourceTree = "<group>"; };
 		92988670CAF3C78C5CE1AD28 /* Pods-LanguageDojo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguageDojo.debug.xcconfig"; path = "Target Support Files/Pods-LanguageDojo/Pods-LanguageDojo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				069F4DE2245D4C0400EE6C6E /* AddViewController.swift */,
 				069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */,
 				069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */,
+				06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */,
 				069F4DE1245D4BF600EE6C6E /* HomeViewController.swift in Sources */,
 				069505882459A04700702C2A /* AppDelegate.swift in Sources */,
 				069F4DE3245D4C0400EE6C6E /* AddViewController.swift in Sources */,
