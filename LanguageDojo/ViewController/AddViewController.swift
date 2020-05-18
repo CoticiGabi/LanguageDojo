@@ -25,6 +25,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
     var selectedImage: UIImage?
     let tableView = UITableView()
     var selectedButton = UIButton()
+    var ref: DatabaseReference?
     
     let transparentView = UIView()
     override func viewDidLoad() {
@@ -54,10 +55,28 @@ class AddViewController: UIViewController, UITextViewDelegate {
         //Dropdown
         
         rightBarDropDown.anchorView = selectLanguageButton
-        rightBarDropDown.dataSource = ["English", "Spanish"]
-        rightBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
+        rightBarDropDown.dataSource = [String]()
+        Database
+        .database()
+        .reference()
+        .child("users")
+        .child(Auth.auth().currentUser!.uid)
+        .child("apprenticeLanguages")
+        .queryOrderedByKey()
+        .observeSingleEvent(of: .value, with: { snapshot in
+            guard let list = snapshot.value as? NSArray else {
+                print("Error")
+                return
+            }
+            for language in list {
+                self.rightBarDropDown.dataSource.append(language as! String)
+                print(self.rightBarDropDown.dataSource.count)
 
-        
+            }
+        })
+        rightBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
+        print(rightBarDropDown.dataSource.count)
+
     }
     
     //POST button
@@ -76,10 +95,15 @@ class AddViewController: UIViewController, UITextViewDelegate {
         let postsReference = ref.child("posts")
         let newPostId = postsReference.childByAutoId().key!
         let newPostReference = postsReference.child(newPostId)
-        newPostReference.setValue(["language": self.selectLanguageButton.currentTitle, "message": textView.text!])
+        newPostReference.setValue(["language": self.selectLanguageButton.currentTitle, "message": textView.text!, "userId":Auth.auth().currentUser?.uid])
+        
+        let usersReference = ref.child("users").child(Auth.auth().currentUser!.uid)
+        let usersPostsRef = usersReference.child("posts").child(newPostId)
+        usersPostsRef.setValue([newPostId: true])
+        
     }
     
-    // Select the langauge fot he post
+    // Select the langauge for the post
     @IBAction func onClickSelectLanguage(_ sender: Any) {
 
            rightBarDropDown.selectionAction = { (index: Int, item: String) in

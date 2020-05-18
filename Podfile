@@ -10,6 +10,7 @@ target 'LanguageDojo' do
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
+  pod 'Firebase/Storage'
   pod 'ProgressHUD'
   pod 'DropDown'
 	# add pods for any other desired Firebase products

@@ -8,8 +8,11 @@
 
 import UIKit
 import DropDown
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
 
     @IBOutlet weak var letsTrainBtn: UIButton!
@@ -21,6 +24,8 @@ class WelcomeViewController: UIViewController {
     let apprenticeBarDropDown = DropDown()
     var selectedMasterLanguagesList = [String]()
     var selectedApprenticeLanguagesList = [String]()
+    var selectedImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,18 +45,42 @@ class WelcomeViewController: UIViewController {
         
         //Apprentice Dropdown
                
-           apprenticeBarDropDown.anchorView = selectApprenticeLanguagesBtn
-           apprenticeBarDropDown.dataSource = ["English", "Spanish", "Romanian", "French"]
-           apprenticeBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
-           apprenticeBarDropDown.backgroundColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0)
+       apprenticeBarDropDown.anchorView = selectApprenticeLanguagesBtn
+       apprenticeBarDropDown.dataSource = ["English", "Spanish", "Romanian", "French"]
+       apprenticeBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
+       apprenticeBarDropDown.backgroundColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0)
+    
         
         //Profile Image
-        profileImage.layer.masksToBounds = true
-        profileImage.layer.cornerRadius = profileImage.bounds.width / 4
-        profileImage.layer.borderWidth = 2.0
-        profileImage.layer.borderColor = UIColor.red.cgColor
         
+        profileImage.layer.masksToBounds = false
+        profileImage.layer.cornerRadius = profileImage.frame.width/2
+        profileImage.clipsToBounds = true
+        selectedImage = UIImage(named: "profile_icon")
         
+        let tapGesture =  UITapGestureRecognizer(target: self, action: #selector(WelcomeViewController.handleSelectProfileImage))
+        profileImage.addGestureRecognizer(tapGesture)
+        profileImage.isUserInteractionEnabled = true
+        
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage {
+            profileImage.image = image
+            selectedImage = image
+        }
+        print("did pick photo")
+        print(info)
+//        profileImage.image = infoPhoto
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleSelectProfileImage() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
     }
     
     // Select master languages from dropdown
@@ -178,10 +207,55 @@ class WelcomeViewController: UIViewController {
         print(selectedApprenticeLanguagesList)
     }
     
+    
     //Go to Home.Storyboard
     @IBAction func onClickLetsTrain(_ sender: Any) {
+        
+        let storageRef = Storage.storage().reference(forURL: "gs://languagedojo-bab50.appspot.com")
+        let storageProfileRef = storageRef.child("profileImage").child(Auth.auth().currentUser!.uid)
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        let profileImageRef = storageRef.child("profile_image")
+        guard let profileImg = self.selectedImage else {
+            return
+        }
+        
+        guard let imageData = profileImg.jpegData(compressionQuality: 0.1) else {
+            return
+        }
+        
+        storageProfileRef.putData(imageData, metadata: metadata, completion: { (storage, error) in
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            
+            storageProfileRef.downloadURL { (url, error) in
+                if let metaImageUrl = url?.absoluteString {
+                    print(metaImageUrl)
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["profileImage": metaImageUrl, "masterLanguages": self.selectedMasterLanguagesList, "apprenticeLanguages": self.selectedApprenticeLanguagesList])
+
+                }
+            }
+        })
+        
+//        let ref = Database.database().reference()
+//        let masterLanguagesRef = ref.child("users").child(Auth.auth().currentUser!.uid).child("masterLanguages")
+//        for masterLanguage in selectedMasterLanguagesList {
+//            masterLanguagesRef.setValue([masterLanguage: true])
+//        }
+//
+//        let apprenticeLanguagesRef = ref.child("apprenticeLanguages")
+//        for apprenticeLanguage in selectedApprenticeLanguagesList {
+//            let newApprenticeLanguageRef = apprenticeLanguagesRef.child(Auth.auth().currentUser!.uid)
+//            newApprenticeLanguageRef.setValue(["apprenticeLanguage": apprenticeLanguage])
+//        }
+        
         let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
         tabBarController.modalPresentationStyle = .fullScreen
         self.present(tabBarController, animated: true, completion: nil)
     }
+    
+    
 }
+

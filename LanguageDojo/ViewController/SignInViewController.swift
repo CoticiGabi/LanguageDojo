@@ -68,7 +68,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func signInButton(_ sender: Any) {
-        print("AAAAAAAAAAAa")
         view.endEditing(true)
         Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
             if error != nil {
