@@ -11,11 +11,15 @@ import Foundation
 class Post {
     var id: String
     var message: String
-    var author: String
+    var author: User
+//    var timestamp: Double
+    var nrOfLikes: Int
     
-    init(id: String, message: String, author: String) {
+    init(id: String, message: String, author: User, nrOfLikes: Int) {
         self.id = id
         self.message = message
         self.author = author
+//        self.timestamp = timestamp
+        self.nrOfLikes = nrOfLikes
     }
 }

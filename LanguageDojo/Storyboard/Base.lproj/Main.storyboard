@@ -230,7 +230,7 @@
                                     <action selector="onClickLetsTrain:" destination="hfk-Ay-4MA" eventType="touchUpInside" id="3sH-Cl-BnP"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon_100" translatesAutoresizingMaskIntoConstraints="NO" id="pbx-Rs-NIW">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon_100" translatesAutoresizingMaskIntoConstraints="NO" id="pbx-Rs-NIW">
                                 <rect key="frame" x="132" y="273" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="G6N-N7-sKJ"/>

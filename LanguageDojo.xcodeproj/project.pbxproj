@@ -24,6 +24,14 @@
 		069F4DE3245D4C0400EE6C6E /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE2245D4C0400EE6C6E /* AddViewController.swift */; };
 		069F4DE5245D4C0C00EE6C6E /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */; };
 		069F4DE7245D4C1400EE6C6E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */; };
+		06A585732472C3480015C944 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585722472C3480015C944 /* User.swift */; };
+		06A585762472C4690015C944 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585752472C4690015C944 /* UserService.swift */; };
+		06A585792474139D0015C944 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585772474139D0015C944 /* PostTableViewCell.swift */; };
+		06A5857A2474139D0015C944 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06A585782474139D0015C944 /* PostTableViewCell.xib */; };
+		06A5857E2476A90A0015C944 /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A5857D2476A90A0015C944 /* EditTableViewController.swift */; };
+		06A585822476AA1A0015C944 /* EditViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585812476AA1A0015C944 /* EditViewCell.swift */; };
+		06A585842476B2E90015C944 /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585832476B2E90015C944 /* EditPost.swift */; };
+		06A585862476B70B0015C944 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585852476B70B0015C944 /* PostService.swift */; };
 		06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */; };
 		06FFA984246EC29E00C5A359 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA983246EC29E00C5A359 /* Post.swift */; };
 		B9CF9AC5C410656967F2BF6C /* Pods_LanguageDojo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */; };
@@ -49,6 +57,14 @@
 		069F4DE2245D4C0400EE6C6E /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		06A585722472C3480015C944 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		06A585752472C4690015C944 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		06A585772474139D0015C944 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		06A585782474139D0015C944 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		06A5857D2476A90A0015C944 /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
+		06A585812476AA1A0015C944 /* EditViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewCell.swift; sourceTree = "<group>"; };
+		06A585832476B2E90015C944 /* EditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
+		06A585852476B70B0015C944 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		06FFA983246EC29E00C5A359 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguageDojo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,11 +89,15 @@
 			children = (
 				069F4DDE245B12ED00EE6C6E /* SignUpViewController.swift */,
 				069F4DDC245B029200EE6C6E /* SignInViewController.swift */,
+				06A5857D2476A90A0015C944 /* EditTableViewController.swift */,
 				069F4DE0245D4BF600EE6C6E /* HomeViewController.swift */,
 				069F4DE2245D4C0400EE6C6E /* AddViewController.swift */,
 				069F4DE4245D4C0C00EE6C6E /* NotificationsViewController.swift */,
 				069F4DE6245D4C1400EE6C6E /* ProfileViewController.swift */,
 				06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */,
+				06A585772474139D0015C944 /* PostTableViewCell.swift */,
+				06A585782474139D0015C944 /* PostTableViewCell.xib */,
+				06A585812476AA1A0015C944 /* EditViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -117,6 +137,7 @@
 		069505862459A04700702C2A /* LanguageDojo */ = {
 			isa = PBXGroup;
 			children = (
+				06A585742472C45B0015C944 /* Service */,
 				06FFA982246EC27C00C5A359 /* Models */,
 				060459A9245EB17A00F45A56 /* GoogleService-Info.plist */,
 				060459AC245EB21300F45A56 /* Storyboard */,
@@ -129,10 +150,21 @@
 			path = LanguageDojo;
 			sourceTree = "<group>";
 		};
+		06A585742472C45B0015C944 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				06A585752472C4690015C944 /* UserService.swift */,
+				06A585852476B70B0015C944 /* PostService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		06FFA982246EC27C00C5A359 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				06FFA983246EC29E00C5A359 /* Post.swift */,
+				06A585722472C3480015C944 /* User.swift */,
+				06A585832476B2E90015C944 /* EditPost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -215,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				069505942459A04900702C2A /* LaunchScreen.storyboard in Resources */,
+				06A5857A2474139D0015C944 /* PostTableViewCell.xib in Resources */,
 				069E6399245DA486009DC782 /* Home.storyboard in Resources */,
 				060459AA245EB17A00F45A56 /* GoogleService-Info.plist in Resources */,
 				069E63A0245DA5FC009DC782 /* Profile.storyboard in Resources */,
@@ -275,16 +308,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06A585842476B2E90015C944 /* EditPost.swift in Sources */,
 				06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */,
 				069F4DE1245D4BF600EE6C6E /* HomeViewController.swift in Sources */,
+				06A585792474139D0015C944 /* PostTableViewCell.swift in Sources */,
+				06A5857E2476A90A0015C944 /* EditTableViewController.swift in Sources */,
 				069505882459A04700702C2A /* AppDelegate.swift in Sources */,
 				069F4DE3245D4C0400EE6C6E /* AddViewController.swift in Sources */,
 				0695058A2459A04700702C2A /* SceneDelegate.swift in Sources */,
+				06A585862476B70B0015C944 /* PostService.swift in Sources */,
 				069F4DDF245B12ED00EE6C6E /* SignUpViewController.swift in Sources */,
 				069F4DE5245D4C0C00EE6C6E /* NotificationsViewController.swift in Sources */,
 				069F4DE7245D4C1400EE6C6E /* ProfileViewController.swift in Sources */,
+				06A585762472C4690015C944 /* UserService.swift in Sources */,
 				069F4DDD245B029200EE6C6E /* SignInViewController.swift in Sources */,
 				06FFA984246EC29E00C5A359 /* Post.swift in Sources */,
+				06A585822476AA1A0015C944 /* EditViewCell.swift in Sources */,
+				06A585732472C3480015C944 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

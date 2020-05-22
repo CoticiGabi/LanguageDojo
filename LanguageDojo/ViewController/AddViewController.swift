@@ -16,9 +16,9 @@ class AddViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var wordCounterTextView: UITextField!
     @IBOutlet weak var customView: UIView!
     
+    @IBOutlet weak var postLanguage: UINavigationItem!
     @IBOutlet weak var postButton: UIBarButtonItem!
-    @IBOutlet weak var selectLanguageButton: UIButton!
-    let rightBarDropDown = DropDown()
+//    let rightBarDropDown = DropDown()
 
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var circularProfileImage: UIImageView!
@@ -30,6 +30,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
     let transparentView = UIView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
         circularProfileImage.layer.masksToBounds = true
@@ -43,10 +44,10 @@ class AddViewController: UIViewController, UITextViewDelegate {
 //        customView.backgroundColor = UIColor.red
         customView.layer.borderWidth = 1.0
         customView.layer.borderColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0).cgColor
-        wordCounterTextView.layer.cornerRadius = 10.0
-        wordCounterTextView.layer.borderWidth = 0.0
-        wordCounterTextView.layer.borderColor = UIColor.red.cgColor
-        wordCounterTextView.isEnabled = false
+//        wordCounterTextView.layer.cornerRadius = 10.0
+//        wordCounterTextView.layer.borderWidth = 0.0
+//        wordCounterTextView.layer.borderColor = UIColor.red.cgColor
+//        wordCounterTextView.isEnabled = false
 
         textView.inputAccessoryView = customView
         self.view.bringSubviewToFront(textView)
@@ -54,67 +55,54 @@ class AddViewController: UIViewController, UITextViewDelegate {
         
         //Dropdown
         
-        rightBarDropDown.anchorView = selectLanguageButton
-        rightBarDropDown.dataSource = [String]()
-        Database
-        .database()
-        .reference()
-        .child("users")
-        .child(Auth.auth().currentUser!.uid)
-        .child("apprenticeLanguages")
-        .queryOrderedByKey()
-        .observeSingleEvent(of: .value, with: { snapshot in
-            guard let list = snapshot.value as? NSArray else {
-                print("Error")
-                return
-            }
-            for language in list {
-                self.rightBarDropDown.dataSource.append(language as! String)
-                print(self.rightBarDropDown.dataSource.count)
-
-            }
-        })
-        rightBarDropDown.cellConfiguration = { (index, item) in return "\(item)" }
-        print(rightBarDropDown.dataSource.count)
+        postLanguage.title = UserService.currentUser?.apprenticeLanguage
+        
+        //Post button
+        
+        postButton.isEnabled = false
+                
 
     }
     
     //POST button
     
     @IBAction func postButton_TouchUpInside(_ sender: Any) {
-        sendDataToDatabase()
+//        sendDataToDatabase()
         
-         let storyboard = UIStoryboard(name: "Start", bundle: nil)
-         let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-        homeViewController.modalPresentationStyle = .fullScreen
-        self.present(homeViewController, animated: true, completion: nil)    }
-    
-    //Save the post ot database
-    func sendDataToDatabase() {
-        let ref = Database.database().reference()
-        let postsReference = ref.child("posts")
-        let newPostId = postsReference.childByAutoId().key!
-        let newPostReference = postsReference.child(newPostId)
-        newPostReference.setValue(["language": self.selectLanguageButton.currentTitle, "message": textView.text!, "userId":Auth.auth().currentUser?.uid])
         
-        let usersReference = ref.child("users").child(Auth.auth().currentUser!.uid)
-        let usersPostsRef = usersReference.child("posts").child(newPostId)
-        usersPostsRef.setValue([newPostId: true])
+        
+        let postRef = Database.database().reference().child("posts").childByAutoId()
+        
+        guard let user = UserService.currentUser else {return}
+        
+        let postObject = [
+            "author": [
+                "uid": user.uid,
+                "username": user.username,
+                "profileImage": user.profileImage,
+                "email": user.email,
+                "masterLanguage": user.masterLanguage,
+                "apprenticeLanguage": user.apprenticeLanguage,
+                
+            ],
+            "message": textView.text!,
+            "language": postLanguage.title!,
+//            "timestamp": [".sv": "timestamp"],
+            "likes": 0
+        ] as [String: Any]
+        
+        postRef.setValue(postObject, withCompletionBlock: {error, ref in
+            if error == nil {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                 let storyboard = UIStoryboard(name: "Start", bundle: nil)
+                 let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+                homeViewController.modalPresentationStyle = .fullScreen
+                self.present(homeViewController, animated: true, completion: nil)
+            }
+        })
         
     }
-    
-    // Select the langauge for the post
-    @IBAction func onClickSelectLanguage(_ sender: Any) {
-
-           rightBarDropDown.selectionAction = { (index: Int, item: String) in
-            print("Selected item: \(item) at index: \(index)")
-            self.selectLanguageButton.setTitle(item, for: UIControl.State.normal)
-        }
-
-           rightBarDropDown.width = 140
-           rightBarDropDown.bottomOffset = CGPoint(x: 0, y:(rightBarDropDown.anchorView?.plainView.bounds.height)!)
-           rightBarDropDown.show()
-        }
     
 
     
@@ -138,17 +126,27 @@ class AddViewController: UIViewController, UITextViewDelegate {
         // If updated text view will be empty, add the placeholder
         // and set the cursor to the beginning of the text view
 
-        if 280 - updatedText.count < 10 && 280 - updatedText.count >= 0{
-            wordCounterTextView.text = String(280 - updatedText.count + 1)
-            wordCounterTextView.layer.borderWidth = 2.0
-
-        } else if  280 - updatedText.count + 1 <= 0{
-            wordCounterTextView.text = String(0)
-            wordCounterTextView.layer.borderWidth = 2.0
-
+//        if 280 - updatedText.count < 10 && 280 - updatedText.count >= 0{
+//            wordCounterTextView.text = String(280 - updatedText.count + 1)
+//            wordCounterTextView.layer.borderWidth = 2.0
+//
+//        } else if  280 - updatedText.count + 1 <= 0{
+//            wordCounterTextView.text = String(0)
+//            wordCounterTextView.layer.borderWidth = 2.0
+//
+//        } else {
+//            wordCounterTextView.layer.borderWidth = 0.0
+//            wordCounterTextView.text = ""
+//        }
+        
+//        print(updatedText)
+        
+        if updatedText.isEmpty || updatedText == "What's happening ?" {
+//            print("AAAAAAAAAA")
+            postButton.isEnabled = false
         } else {
-            wordCounterTextView.layer.borderWidth = 0.0
-            wordCounterTextView.text = ""
+//            print("BBBBBBb")
+            postButton.isEnabled = true
         }
         
         if updatedText.isEmpty {
@@ -169,10 +167,10 @@ class AddViewController: UIViewController, UITextViewDelegate {
             
         // if the number of characters > 280 stop writing
         /// TO DO :  add some detail that will inform the user that he can't wrtite any more words
-        else if(updatedText.count == 282 && range.length == 0) {
-            print("Please summarize in 20 characters or less")
-            return false;
-        }
+//        else if(updatedText.count == 282 && range.length == 0) {
+//            print("Please summarize in 20 characters or less")
+//            return false;
+//        }
 
         // For every other case, the text should change with the usual
         // behavior...
@@ -193,6 +191,8 @@ class AddViewController: UIViewController, UITextViewDelegate {
         homeViewController.modalPresentationStyle = .fullScreen
         self.present(homeViewController, animated: true, completion: nil)
     }
+    
+    
     func textViewDidChangeSelection(_ textView: UITextView) {
         if self.view.window != nil {
             if textView.textColor == UIColor.lightGray {
@@ -205,7 +205,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
 
 extension AddViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        print("Did finish picking Media!AKJHGAKJHAGKJHAGKJHAGKJAHGKAJHGAKJHGAKJHGAKJHAG")
+        print("Did finish picking Media!")
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             selectedImage = image
         }

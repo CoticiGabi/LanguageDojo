@@ -10,7 +10,6 @@
         <!--Add View Controller-->
         <scene sceneID="hgq-bv-Jxj">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="z3O-RR-rsB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Add" id="iBw-U8-J0p" customClass="AddViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xtJ-X6-bDY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -95,22 +94,11 @@
                         <viewLayoutGuide key="safeArea" id="vna-cG-Z56"/>
                     </view>
                     <navigationItem key="navigationItem" id="bsu-2k-gSE">
-                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Zgn-f0-54N">
                             <connections>
                                 <action selector="closeAddViewController:" destination="iBw-U8-J0p" id="HaV-bo-bPk"/>
                             </connections>
                         </barButtonItem>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rz4-et-YYw">
-                            <rect key="frame" x="152" y="7" width="110" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Select language">
-                                <color key="titleColor" red="0.73332417009999995" green="0.6786510348" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onClickSelectLanguage:" destination="iBw-U8-J0p" eventType="touchUpInside" id="bx1-v2-t0E"/>
-                            </connections>
-                        </button>
                         <barButtonItem key="rightBarButtonItem" title="Post" id="ZP1-Rs-Wbo">
                             <connections>
                                 <action selector="postButton_TouchUpInside:" destination="iBw-U8-J0p" id="wb5-N9-mdJ"/>
@@ -121,11 +109,12 @@
                         <outlet property="circularProfileImage" destination="aTy-ly-h8a" id="0o7-Ze-djx"/>
                         <outlet property="customView" destination="ZBi-Ba-ug4" id="dHQ-nD-cos"/>
                         <outlet property="postButton" destination="ZP1-Rs-Wbo" id="emR-IH-QsM"/>
-                        <outlet property="selectLanguageButton" destination="rz4-et-YYw" id="tJU-ZK-1rM"/>
+                        <outlet property="postLanguage" destination="bsu-2k-gSE" id="9hf-Aw-S6E"/>
                         <outlet property="textView" destination="05L-Wa-TE3" id="JZE-GY-FtJ"/>
                         <outlet property="wordCounterTextView" destination="tpj-bn-RMc" id="aU4-HO-uKO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z3O-RR-rsB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1111.5942028985507" y="760.71428571428567"/>
         </scene>

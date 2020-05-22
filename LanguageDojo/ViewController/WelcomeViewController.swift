@@ -22,8 +22,8 @@ class WelcomeViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let masterBarDropDown = DropDown()
     let apprenticeBarDropDown = DropDown()
-    var selectedMasterLanguagesList = [String]()
-    var selectedApprenticeLanguagesList = [String]()
+    var selectedMasterLanguage = ""
+    var selectedApprenticeLanguage = ""
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -95,55 +95,17 @@ class WelcomeViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         
         masterBarDropDown.selectionAction = { (index: Int, item: String) in
-            print("Selected item: \(item) at index: \(index)")
-            if (self.selectMasterLanguagesBtn.currentTitle?.contains(", "+item))! {
-                self.selectMasterLanguagesBtn.setTitle(self.selectMasterLanguagesBtn.currentTitle?.replacingOccurrences(of: ", "+item, with: ""),  for: UIControl.State.normal)
-                if let indexValue = self.selectedMasterLanguagesList.firstIndex(of: item) {
-                self.selectedMasterLanguagesList.remove(at: indexValue)
-                }
-                
-                if self.selectMasterLanguagesBtn.currentTitle == "" {
-                    self.selectMasterLanguagesBtn.setTitle("You are a master", for: UIControl.State.normal)
-                }
-                return
-            }
-            else if (self.selectMasterLanguagesBtn.currentTitle?.contains(item + ","))! {
-                self.selectMasterLanguagesBtn.setTitle(self.selectMasterLanguagesBtn.currentTitle?.replacingOccurrences(of: item+",", with: ""),  for: UIControl.State.normal)
-                
-                if let indexValue = self.selectedMasterLanguagesList.firstIndex(of: item) {
-                self.selectedMasterLanguagesList.remove(at: indexValue)
-                }
-                
-                if self.selectMasterLanguagesBtn.currentTitle == "" {
-                    self.selectMasterLanguagesBtn.setTitle("You are a master", for: UIControl.State.normal)
-                }
-                return
-            }else if (self.selectMasterLanguagesBtn.currentTitle?.contains(item))! {
-                self.selectMasterLanguagesBtn.setTitle(self.selectMasterLanguagesBtn.currentTitle?.replacingOccurrences(of: item, with: ""),  for: UIControl.State.normal)
-                
-                if let indexValue = self.selectedMasterLanguagesList.firstIndex(of: item) {
-                self.selectedMasterLanguagesList.remove(at: indexValue)
-                }
-                
-                if self.selectMasterLanguagesBtn.currentTitle == "" {
-                    self.selectMasterLanguagesBtn.setTitle("You are a master", for: UIControl.State.normal)
-                }
-                return
-            }
+            self.selectedMasterLanguage = item
+            self.selectMasterLanguagesBtn.setTitle(item, for: UIControl.State.normal)
             
-            self.selectedMasterLanguagesList.append(item)
             
-            if self.selectMasterLanguagesBtn.currentTitle == "" {
-                self.selectMasterLanguagesBtn.setTitle(self.selectMasterLanguagesBtn.currentTitle! + item, for: UIControl.State.normal)
-            } else {
-            self.selectMasterLanguagesBtn.setTitle(self.selectMasterLanguagesBtn.currentTitle! + ", " + item, for: UIControl.State.normal)
-            }
+
         }
         
         masterBarDropDown.width = selectMasterLanguagesBtn.frame.size.width
         masterBarDropDown.bottomOffset = CGPoint(x: 0, y:(masterBarDropDown.anchorView?.plainView.bounds.height)!)
         masterBarDropDown.show()
-        print(selectedMasterLanguagesList)
+        print(selectedMasterLanguage)
     }
     
     // Select apprentice languages from dropdown
@@ -155,56 +117,14 @@ class WelcomeViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         apprenticeBarDropDown.selectionAction = { (index: Int, item: String) in
          print("Selected item: \(item) at index: \(index)")
-            
-            if (self.selectApprenticeLanguagesBtn.currentTitle?.contains(", "+item))! {
-               self.selectApprenticeLanguagesBtn.setTitle(self.selectApprenticeLanguagesBtn.currentTitle?.replacingOccurrences(of: ", "+item, with: ""),  for: UIControl.State.normal)
-                
-                if let indexValue = self.selectedApprenticeLanguagesList.firstIndex(of: item) {
-                self.selectedApprenticeLanguagesList.remove(at: indexValue)
-                }
-                
-               if self.selectApprenticeLanguagesBtn.currentTitle == "" {
-                   self.selectApprenticeLanguagesBtn.setTitle("You are an apprentice", for: UIControl.State.normal)
-                   }
-                   return
-               }
-               else if (self.selectApprenticeLanguagesBtn.currentTitle?.contains(item + ","))! {
-                   self.selectApprenticeLanguagesBtn.setTitle(self.selectApprenticeLanguagesBtn.currentTitle?.replacingOccurrences(of: item+",", with: ""),  for: UIControl.State.normal)
-                
-                if let indexValue = self.selectedApprenticeLanguagesList.firstIndex(of: item) {
-                self.selectedApprenticeLanguagesList.remove(at: indexValue)
-                }
-                
-                   if self.selectApprenticeLanguagesBtn.currentTitle == "" {
-                       self.selectApprenticeLanguagesBtn.setTitle("You are an apprentice", for: UIControl.State.normal)
-                   }
-                   return
-               }else if (self.selectApprenticeLanguagesBtn.currentTitle?.contains(item))! {
-                   self.selectApprenticeLanguagesBtn.setTitle(self.selectApprenticeLanguagesBtn.currentTitle?.replacingOccurrences(of: item, with: ""),  for: UIControl.State.normal)
-                
-                if let indexValue = self.selectedApprenticeLanguagesList.firstIndex(of: item) {
-                self.selectedApprenticeLanguagesList.remove(at: indexValue)
-                }
-                
-                   if self.selectApprenticeLanguagesBtn.currentTitle == "" {
-                       self.selectApprenticeLanguagesBtn.setTitle("You are an apprentice", for: UIControl.State.normal)
-                   }
-                   return
-               }
-            
-            
-       self.selectedApprenticeLanguagesList.append(item)
-   
-       if self.selectApprenticeLanguagesBtn.currentTitle == "" {
-           self.selectApprenticeLanguagesBtn.setTitle(self.selectApprenticeLanguagesBtn.currentTitle! + item, for: UIControl.State.normal)
-       } else {
-        self.selectApprenticeLanguagesBtn.setTitle(self.selectApprenticeLanguagesBtn.currentTitle! + ", " + item, for: UIControl.State.normal)
-            }
+            self.selectedApprenticeLanguage = item
+            self.selectApprenticeLanguagesBtn.setTitle(item, for: UIControl.State.normal)
+
         }
         apprenticeBarDropDown.width = selectApprenticeLanguagesBtn.frame.size.width
         apprenticeBarDropDown.bottomOffset = CGPoint(x: 0, y:(apprenticeBarDropDown.anchorView?.plainView.bounds.height)!)
         apprenticeBarDropDown.show()
-        print(selectedApprenticeLanguagesList)
+        print(selectedApprenticeLanguage)
     }
     
     
@@ -233,23 +153,11 @@ class WelcomeViewController: UIViewController, UIImagePickerControllerDelegate, 
             storageProfileRef.downloadURL { (url, error) in
                 if let metaImageUrl = url?.absoluteString {
                     print(metaImageUrl)
-                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["profileImage": metaImageUrl, "masterLanguages": self.selectedMasterLanguagesList, "apprenticeLanguages": self.selectedApprenticeLanguagesList])
+                Database.database().reference().child("users").child(Auth.auth().currentUser!.uid).updateChildValues(["profileImage": metaImageUrl, "masterLanguage": self.selectedMasterLanguage, "apprenticeLanguage": self.selectedApprenticeLanguage])
 
                 }
             }
         })
-        
-//        let ref = Database.database().reference()
-//        let masterLanguagesRef = ref.child("users").child(Auth.auth().currentUser!.uid).child("masterLanguages")
-//        for masterLanguage in selectedMasterLanguagesList {
-//            masterLanguagesRef.setValue([masterLanguage: true])
-//        }
-//
-//        let apprenticeLanguagesRef = ref.child("apprenticeLanguages")
-//        for apprenticeLanguage in selectedApprenticeLanguagesList {
-//            let newApprenticeLanguageRef = apprenticeLanguagesRef.child(Auth.auth().currentUser!.uid)
-//            newApprenticeLanguageRef.setValue(["apprenticeLanguage": apprenticeLanguage])
-//        }
         
         let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
         tabBarController.modalPresentationStyle = .fullScreen

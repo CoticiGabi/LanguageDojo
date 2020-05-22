@@ -21,6 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().unselectedItemTintColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0)
         FirebaseApp.configure()
+        let user = Auth.auth().currentUser
+        print(user?.uid)
+        if user != nil {
+            UserService.observeUserProfile(user!.uid) { user in
+                UserService.currentUser = user
+            }
+        }else {
+                UserService.currentUser = nil
+            }
         return true
     }
 

@@ -23,13 +23,18 @@ class ProfileViewController: UIViewController {
 
         do {
             try Auth.auth().signOut()
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
+            signInViewController.modalPresentationStyle = .fullScreen
+            present(signInViewController, animated: true, completion: nil)
         } catch let logOutErr{
             print(logOutErr)
         }
 
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
-        signInViewController.modalPresentationStyle = .fullScreen
-        present(signInViewController, animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let signInViewController = storyboard.instantiateViewController(withIdentifier: "SignIn") as! SignInViewController
+//        signInViewController.modalPresentationStyle = .fullScreen
+//        present(signInViewController, animated: true, completion: nil)
     }
 }
