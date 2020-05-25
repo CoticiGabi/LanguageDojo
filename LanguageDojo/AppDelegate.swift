@@ -13,7 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var post: Post?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().backgroundColor = .white
         UITabBar.appearance().unselectedItemTintColor = UIColor.init(red: 187/255, green: 173/255, blue: 255/255, alpha: 1.0)
         FirebaseApp.configure()
+        post = nil
         let user = Auth.auth().currentUser
         print(user?.uid)
         if user != nil {

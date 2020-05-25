@@ -14,12 +14,14 @@ class Post {
     var author: User
 //    var timestamp: Double
     var nrOfLikes: Int
+    var language: String
     
-    init(id: String, message: String, author: User, nrOfLikes: Int) {
+    init(id: String, message: String, author: User, nrOfLikes: Int, language: String) {
         self.id = id
         self.message = message
         self.author = author
 //        self.timestamp = timestamp
         self.nrOfLikes = nrOfLikes
+        self.language = language
     }
 }

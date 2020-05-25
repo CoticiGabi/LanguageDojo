@@ -10,7 +10,8 @@ import UIKit
 import FirebaseDatabase
 
 protocol editTextProtocol {
-    func editText(textToEdit: String!)
+    func editText(textToEdit: String!, post:Post!)
+//    func setCurrentPost(currentPost: Post)
 }
 
 class PostTableViewCell: UITableViewCell {
@@ -27,13 +28,17 @@ class PostTableViewCell: UITableViewCell {
     var postId: String!
     var textToEdit: String!
     var delegate: editTextProtocol!
+    var author: User!
+    var nrOfLikes: Int!
+    var language: String!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         
-        profileImageView.layer.cornerRadius = profileImageView.bounds.height / 2
-        profileImageView.clipsToBounds = true
+//        profileImageView.layer.cornerRadius = profileImageView.bounds.height / 2
+//        profileImageView.clipsToBounds = true
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,6 +57,7 @@ class PostTableViewCell: UITableViewCell {
     
     @IBAction func likePost(_ sender: Any) {
     
+
         let ref = Database.database().reference().child("posts").child(postId)
         likeButton.isSelected = !likeButton.isSelected
         if likeButton.isSelected {
@@ -79,10 +85,25 @@ class PostTableViewCell: UITableViewCell {
     
     
     @IBAction func editPost(_ sender: Any) {
-        self.delegate.editText(textToEdit: textToEdit)
+        self.delegate.editText(textToEdit: textToEdit, post: Post(id: postId, message: textToEdit, author: author, nrOfLikes: nrOfLikes, language: language))
+//        let storyboard: UIStoryboard = UIStoryboard(name: "Start", bundle: nil)
+//        let homeVc: HomeViewController = storyboard.instantiateViewController(identifier: "Home") as! HomeViewController
+//        homeVc.post = Post(id: postId, message: textToEdit, author: author, nrOfLikes: nrOfLikes)
+//        homeVc.currentPostId = postId
+//        let editVc = EditTableViewController(nibName: "editViewController", bundle: nil)
+//        editVc.originalPost = Post(id: postId, message: textToEdit, author: author, nrOfLikes: nrOfLikes)
+//        print(homeVc.post)
+//        print(postId)
+//        print(textToEdit)
+//        print(author)
+//        print(nrOfLikes)
     }
     
     
     @IBAction func commentOnPost(_ sender: Any) {
     }
+    
+//    func setCurrPost() {
+//        self.delegate.setCurrentPost(currentPost: Post(id: postId, message: textToEdit, author: author, nrOfLikes: nrOfLikes))
+//    }
 }

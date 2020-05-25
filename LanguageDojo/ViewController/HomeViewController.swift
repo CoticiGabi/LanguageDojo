@@ -11,11 +11,15 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class HomeViewController: UITableViewController, editTextProtocol {
+//    func setCurrentPost(currentPost: Post) {
+//        PostService.currentPost = currentPost
+//    }
     
-    func editText(textToEdit: String!) {
+    func editText(textToEdit: String!, post: Post!) {
        animateIn(desiredView: blurView)
         animateIn(desiredView: popUpView)
         editPostTextView.text = textToEdit
+        currentPost = post
         
     }
     
@@ -29,10 +33,22 @@ class HomeViewController: UITableViewController, editTextProtocol {
     @IBOutlet var popUpView: UIView!
     
     var posts = [Post]()
+    var editMessage: String = ""
+    var upvotes: Int = 0
+    var downvotes: Int = 0
+    var currentPostId: String = ""
+    var currentPost: Post!
+//    var currentPostMessage: String = ""
+//    var currentPostLikes: Int = 0
+//    var currentPostAuthor: User?
+//    var currentPostAuthorId: String = ""
+//    var currentpostAuthorUsername: String = ""
+//    var currentPostAuthorProfileImage: String = ""
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         var layoutGuide: UILayoutGuide!
         
@@ -86,6 +102,70 @@ class HomeViewController: UITableViewController, editTextProtocol {
     }
     
     @IBAction func postEditBtn(_ sender: Any) {
+        
+        let editPostRef = Database.database().reference().child("edits").childByAutoId()
+        guard let user = UserService.currentUser else {return}
+//        let postRef = Database.database().reference().child("posts").child(currentPostId)
+//        postRef.observe(.value, with: { snapshot in
+//
+//            for child in snapshot.children {
+//                if let childSnapshot = child as? DataSnapshot,
+//                    let dict = childSnapshot.value as? [String: Any],
+//                    let author = dict["author"] as? [String: Any],
+//                    let uid = author["uid"] as? String,
+//                    let username = author["username"] as? String,
+//                    let email = author["email"] as? String,
+//                    let masterLanguage = author["masterLanguage"] as? String,
+//                    let apprenticeLanguage = author["apprenticeLanguage"] as? String,
+//                    let profileImage = author["profileImage"] as? String,
+//                    let url = URL(string: profileImage),
+//                    let message = dict["message"] as? String,
+//                    let language = dict["language"] as? String,
+//                    let nrOfLikes = dict["likes"] as? Int {
+//                    let userProfile = User(uid: uid , username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
+//                    var post = Post(id: childSnapshot.key, message: message, author: userProfile, nrOfLikes: nrOfLikes)
+//                    post = Post(id: self.currentPostId, message: message, author: userProfile, nrOfLikes: nrOfLikes)
+//
+//                } else {
+//                    print("Error")
+//                }
+//            }
+//        })
+        
+        print(currentPost)
+        print(currentPostId)
+        print(editPostTextView.text)
+        
+        let editObject = [
+            "post": [
+                "uid": currentPost.id,
+                "message": currentPost.message,
+                "likes": currentPost.nrOfLikes,
+                "language": currentPost.language,
+                "postAuthor": [
+                    "uid": currentPost.author.uid,
+                    "username": currentPost.author.username,
+                    "profileImage": currentPost.author.profileImage,
+                    "apprenticeLanguage": currentPost.author.apprenticeLanguage,
+                    "masterLanguage": currentPost.author.masterLanguage,
+                    "email": currentPost.author.email
+                ]
+            ],
+            "editMessage": self.editPostTextView.text,
+            "upvotes": self.upvotes,
+            "downvotes": self.downvotes
+        ] as [String: Any]
+        
+        editPostRef.setValue(editObject, withCompletionBlock: { error, ref in
+            if error == nil {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+                tabBarController.modalPresentationStyle = .fullScreen
+                self.present(tabBarController, animated: true, completion: nil)
+            }
+            
+        })
     }
     
     //Animate poUp
@@ -125,9 +205,9 @@ class HomeViewController: UITableViewController, editTextProtocol {
                     let nrOfLikes = dict["likes"] as? Int {
                     if uid != UserService.currentUser?.uid && language == UserService.currentUser?.masterLanguage{
                         let userProfile = User(uid: uid , username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
-                        let post = Post(id: childSnapshot.key, message: message, author: userProfile, nrOfLikes: nrOfLikes)
+                        let currPost = Post(id: childSnapshot.key, message: message, author: userProfile, nrOfLikes: nrOfLikes, language: language)
 
-                        tempPost.append(post)
+                        tempPost.append(currPost)
                     }
                 } else {
                     print("Error")
@@ -151,8 +231,24 @@ class HomeViewController: UITableViewController, editTextProtocol {
         cell.set(post: posts[indexPath.row])
         cell.postId = self.posts[indexPath.row].id
         cell.textToEdit = self.posts[indexPath.row].message
+        cell.author = self.posts[indexPath.row].author
+        cell.nrOfLikes = self.posts[indexPath.row].nrOfLikes
+        cell.language = self.posts[indexPath.row].language
         cell.delegate = self
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell at #\(indexPath.row) is selected!")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! PostTableViewCell
+//        cell.set(post: posts[indexPath.row])
+        cell.postId = self.posts[indexPath.row].id
+        cell.textToEdit = self.posts[indexPath.row].message
+        cell.author = self.posts[indexPath.row].author
+        cell.nrOfLikes = self.posts[indexPath.row].nrOfLikes
+        let editTableViewController = self.storyboard?.instantiateViewController(identifier: "editViewController") as! EditTableViewController
+        editTableViewController.modalPresentationStyle = .fullScreen
+       self.present(editTableViewController, animated: true, completion: nil)
     }
 
 }

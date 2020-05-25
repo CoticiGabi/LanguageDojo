@@ -188,7 +188,7 @@
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UrO-8c-Asf">
                             <rect key="frame" x="3" y="36" width="314" height="92"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                             <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -210,7 +210,6 @@
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
                             <connections>
-                                <action selector="cancelEditBtn:" destination="EAY-SG-MwX" eventType="touchUpInside" id="AZI-jx-wcE"/>
                                 <action selector="postEditBtn:" destination="EAY-SG-MwX" eventType="touchUpInside" id="iuL-95-Sm4"/>
                             </connections>
                         </button>
@@ -232,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="167" y="846"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Edit Table View Controller-->
         <scene sceneID="M53-wj-bWf">
             <objects>
-                <tableViewController storyboardIdentifier="editViewController" id="Psr-Un-fyh" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="editViewController" id="Psr-Un-fyh" customClass="EditTableViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hm7-iX-cdh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -365,7 +364,7 @@
                                     <outlet property="subtitleLabel" destination="1Hj-gW-G2f" id="sys-M8-5Nr"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCell" rowHeight="214" id="xPn-1S-VMf" customClass="EditViewCell" customModule="LanguageDojo" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="editCell" rowHeight="214" id="xPn-1S-VMf" customClass="EditViewCell" customModule="LanguageDojo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="242" width="414" height="214"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xPn-1S-VMf" id="X7z-jS-mBe">
@@ -401,37 +400,45 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpV-f0-jew">
-                                                    <rect key="frame" x="59" y="173" width="59" height="25"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YpV-f0-jew">
+                                                    <rect key="frame" x="59" y="173" width="53" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="An7-bO-Wiu"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Upvote">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="upvoteBtn_touchUpInside:" destination="xPn-1S-VMf" eventType="touchUpInside" id="6Mn-Eg-tbe"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hax-Xm-4cc">
-                                                    <rect key="frame" x="258" y="173" width="81" height="25"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hax-Xm-4cc">
+                                                    <rect key="frame" x="266" y="173" width="73" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="CS6-jb-Utn"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="Downvote">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="downvoteBtn_touchUpInside:" destination="xPn-1S-VMf" eventType="touchUpInside" id="7oy-gp-7D5"/>
+                                                    </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-uV-gzc">
-                                                    <rect key="frame" x="126" y="178" width="18.5" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3i-uV-gzc">
+                                                    <rect key="frame" x="120" y="173" width="18.5" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="Yb7-gK-OV3"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="b5Z-TP-65F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0h-3S-iiQ">
-                                                    <rect key="frame" x="347" y="178" width="18.5" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0h-3S-iiQ">
+                                                    <rect key="frame" x="347" y="173" width="18.5" height="25"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="quW-um-N3G"/>
+                                                        <constraint firstAttribute="height" constant="25" id="quW-um-N3G"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -445,6 +452,7 @@
                                                 <constraint firstItem="YpV-f0-jew" firstAttribute="leading" secondItem="ypl-n7-oP5" secondAttribute="trailing" constant="19" id="3B0-gL-eMk"/>
                                                 <constraint firstItem="WXG-37-gJK" firstAttribute="top" secondItem="VhG-fW-FSC" secondAttribute="top" id="3cK-Wx-Wjq"/>
                                                 <constraint firstItem="ypl-n7-oP5" firstAttribute="top" secondItem="VhG-fW-FSC" secondAttribute="top" id="90K-Jm-9fT"/>
+                                                <constraint firstItem="r0h-3S-iiQ" firstAttribute="top" secondItem="Uf7-OA-fpu" secondAttribute="bottom" id="Bt0-Px-fQ8"/>
                                                 <constraint firstItem="85a-XX-fqb" firstAttribute="leading" secondItem="ypl-n7-oP5" secondAttribute="trailing" constant="8" id="I6e-tp-bER"/>
                                                 <constraint firstAttribute="bottom" secondItem="k3i-uV-gzc" secondAttribute="bottom" id="NQL-Je-M7b"/>
                                                 <constraint firstAttribute="bottom" secondItem="YpV-f0-jew" secondAttribute="bottom" id="Oni-KF-wXZ"/>
@@ -453,6 +461,7 @@
                                                 <constraint firstItem="WXG-37-gJK" firstAttribute="leading" secondItem="ypl-n7-oP5" secondAttribute="trailing" constant="8" id="TRJ-KS-id4"/>
                                                 <constraint firstItem="Uf7-OA-fpu" firstAttribute="top" secondItem="ypl-n7-oP5" secondAttribute="bottom" constant="2" id="Zcw-Lh-9m0"/>
                                                 <constraint firstAttribute="bottom" secondItem="r0h-3S-iiQ" secondAttribute="bottom" id="enq-jw-ntS"/>
+                                                <constraint firstItem="k3i-uV-gzc" firstAttribute="top" secondItem="Uf7-OA-fpu" secondAttribute="bottom" id="jNp-m5-jxn"/>
                                                 <constraint firstItem="r0h-3S-iiQ" firstAttribute="leading" secondItem="hax-Xm-4cc" secondAttribute="trailing" constant="8" id="jRp-lg-KnK"/>
                                                 <constraint firstItem="ypl-n7-oP5" firstAttribute="leading" secondItem="VhG-fW-FSC" secondAttribute="leading" id="k9W-zD-VAB"/>
                                                 <constraint firstItem="YpV-f0-jew" firstAttribute="top" secondItem="Uf7-OA-fpu" secondAttribute="bottom" id="ql3-2f-oTX"/>
@@ -469,6 +478,15 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <viewLayoutGuide key="safeArea" id="fT6-T4-gjl"/>
+                                <connections>
+                                    <outlet property="editPostDownvotes" destination="hax-Xm-4cc" id="J7p-n2-pjw"/>
+                                    <outlet property="editPostMessage" destination="Uf7-OA-fpu" id="GGS-lR-mSj"/>
+                                    <outlet property="editPostNrOfDownvotes" destination="r0h-3S-iiQ" id="zda-D3-LOV"/>
+                                    <outlet property="editPostNrOfUpvotes" destination="k3i-uV-gzc" id="rWK-10-rFM"/>
+                                    <outlet property="editPostProfileImage" destination="ypl-n7-oP5" id="e6u-rO-V9N"/>
+                                    <outlet property="editPostUpvotes" destination="YpV-f0-jew" id="Vep-7U-6Xr"/>
+                                    <outlet property="editPostUsernameLabel" destination="WXG-37-gJK" id="lNa-lz-qEg"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

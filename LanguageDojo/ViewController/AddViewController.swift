@@ -95,10 +95,13 @@ class AddViewController: UIViewController, UITextViewDelegate {
             if error == nil {
                 self.dismiss(animated: true, completion: nil)
             } else {
-                 let storyboard = UIStoryboard(name: "Start", bundle: nil)
-                 let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
-                homeViewController.modalPresentationStyle = .fullScreen
-                self.present(homeViewController, animated: true, completion: nil)
+//                 let storyboard = UIStoryboard(name: "Start", bundle: nil)
+//                 let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+//                homeViewController.modalPresentationStyle = .fullScreen
+//                self.present(homeViewController, animated: true, completion: nil)
+                let tabBarController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+                tabBarController.modalPresentationStyle = .fullScreen
+                self.present(tabBarController, animated: true, completion: nil)
             }
         })
         

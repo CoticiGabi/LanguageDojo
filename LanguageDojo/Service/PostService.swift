@@ -13,22 +13,20 @@ class PostService {
     
     static var currentPost: Post?
     
-    static func observePost(_ uid:String, completion: @escaping((_ user: User?) -> ())) {
-        let userRef = Database.database().reference().child("posts/\(uid)")
+    static func observePost(_ uid:String, completion: @escaping((_ post: Post?) -> ())) {
+        let postRef = Database.database().reference().child("posts/\(uid)")
         
-        userRef.observe(.value, with: {snapshot in
-            var user: User?
+        postRef.observe(.value, with: {snapshot in
+            var post: Post?
             
             if let dict = snapshot.value as? [String: Any],
-                let username = dict["username"] as? String,
-                let email = dict["email"] as? String,
-                let masterLanguage = dict["masterLanguage"] as? String,
-                let apprenticeLanguage = dict["apprenticeLanguage"] as? String,
-                let profileImage = dict["profileImage"] as? String,
-                let url = URL(string: profileImage){
-                    user = User(uid: uid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
+                let message = dict["message"] as? String,
+                let author = dict["author"] as? User,
+                let nrOfLikes = dict["likes"] as? Int,
+                let language = dict["language"] as? String{
+                    post = Post(id: uid, message: message, author: author, nrOfLikes: nrOfLikes, language: language)
             }
-            completion(user)
+            completion(post)
         })
     }
     

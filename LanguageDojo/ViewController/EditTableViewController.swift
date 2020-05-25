@@ -7,14 +7,26 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseDatabase
 
-class EditTableViewController: UITableViewController {
+class EditTableViewController: UITableViewController, editTextProtocol {
+    
+    func editText(textToEdit: String!, post: Post!) {
+        text = textToEdit
+        originalPost = post
+        
+    }
     
     var editPosts = [EditPost]()
+    var originalPost: Post!
+    var text: String = ""
+
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("AAAAAAAAA")
         
         var layoutGuide: UILayoutGuide!
         
@@ -40,29 +52,73 @@ class EditTableViewController: UITableViewController {
     
     func observeEdits() {
         
+        print("A intrat")
+        let editRef = Database.database().reference().child("edits")
+        editRef.observe(.value, with: { snapshot in
+            print(snapshot)
+            var tempEdits = [EditPost]()
+            for child in snapshot.children {
+                print(child)
+                if let childSnapshot = child as? DataSnapshot,
+                    let dict = childSnapshot.value as? [String: Any],
+                    let editPost = dict["post"] as? [String: Any],
+                    let uid = editPost["uid"] as? String,
+                    let language = editPost["language"] as? String,
+                    let message = editPost["message"] as? String,
+                    let nrOfLikes = editPost["likes"] as? Int,
+                    let author = editPost["postAuthor"] as? [String: Any],
+                    let authorUid = author["uid"] as? String,
+                    let username = author["username"] as? String,
+                    let email = author["email"] as? String,
+                    let masterLanguage = author["masterLanguage"] as? String,
+                    let apprenticeLanguage = author["apprenticeLanguage"] as? String,
+                    let profileImage = author["profileImage"] as? String,
+                    let editMessage = dict["editMessage"] as? String,
+                    let upvotes = dict["upvotes"] as? Int,
+                    let downVotes = dict["downvotes"] as? Int
+                {
+                     let user = User(uid: authorUid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
+                        let post = Post(id: uid, message: message, author: user, nrOfLikes: nrOfLikes, language: language)
+                        let currentUser = UserService.currentUser
+                        let editPost = EditPost(id: childSnapshot.key, message: editMessage, author: currentUser!, nrOfUpvotes:    upvotes, nrOfDownvotes: downVotes, post: post)
+                    tempEdits.append(editPost)
+                    print("Corect")
+                } else {
+                    print("Error")
+                }
+            }
+            self.editPosts = tempEdits
+            self.tableView.reloadData()
+        })
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return editPosts.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+//        if indexPath.row == 0 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! PostTableViewCell
+//            cell.set(post: originalPost)
+//            return cell
+//
+//        }
+//        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditViewCell
+            cell.setEditPost(editPost: editPosts[indexPath.row])
+            cell.editId = self.editPosts[indexPath.row].id
+            return cell
+//        }
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
