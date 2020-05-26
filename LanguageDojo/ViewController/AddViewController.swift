@@ -88,7 +88,8 @@ class AddViewController: UIViewController, UITextViewDelegate {
             "message": textView.text!,
             "language": postLanguage.title!,
 //            "timestamp": [".sv": "timestamp"],
-            "likes": 0
+            "likes": 0,
+            "usersWhoLiked": []
         ] as [String: Any]
         
         postRef.setValue(postObject, withCompletionBlock: {error, ref in
@@ -106,8 +107,6 @@ class AddViewController: UIViewController, UITextViewDelegate {
         })
         
     }
-    
-
     
     @IBAction func photoPickerButton(_ sender: Any) {
         let pickerController = UIImagePickerController()

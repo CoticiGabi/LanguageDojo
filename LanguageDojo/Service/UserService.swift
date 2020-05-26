@@ -25,7 +25,7 @@ class UserService {
                 let masterLanguage = dict["masterLanguage"] as? String,
                 let apprenticeLanguage = dict["apprenticeLanguage"] as? String,
                 let profileImage = dict["profileImage"] as? String,
-                let url = URL(string: profileImage){
+                let url = URL(string: profileImage) {
                     user = User(uid: uid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
             }
             completion(user)

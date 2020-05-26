@@ -31,6 +31,7 @@ class PostTableViewCell: UITableViewCell {
     var author: User!
     var nrOfLikes: Int!
     var language: String!
+    var usersWhoLiked: [String] = [String]()
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -58,28 +59,134 @@ class PostTableViewCell: UITableViewCell {
     @IBAction func likePost(_ sender: Any) {
     
 
-        let ref = Database.database().reference().child("posts").child(postId)
-        likeButton.isSelected = !likeButton.isSelected
-        if likeButton.isSelected {
-            likeButton.setImage(UIImage(named: "notification_icon_selected"), for: UIControl.State.normal)
-            ref.observeSingleEvent(of: .value, with: { snapshot in
+//        let ref = Database.database().reference().child("posts").child(postId)
+//        likeButton.isSelected = !likeButton.isSelected
+//        if likeButton.isSelected {
+//            likeButton.setImage(UIImage(named: "notification_icon_selected"), for: UIControl.State.normal)
+//            ref.observeSingleEvent(of: .value, with: { snapshot in
+//                if let post = snapshot.value as? [String: Any] {
+//                    print(post)
+//                    let likes = post["likes"] as? Double
+//                    ref.updateChildValues(["likes": likes! + 1])
+//                }
+//            })
+//        } else {
+//            likeButton.setImage(UIImage(named: "notification_icon"), for: UIControl.State.normal)
+//            ref.observeSingleEvent(of: .value, with: { snapshot in
+//                if let post = snapshot.value as? [String: Any] {
+//                    print(post)
+//                    let likes = post["likes"] as? Double
+//                    ref.updateChildValues(["likes": likes! - 1])
+//                }
+//            })
+//        }
+//        print(likeButton.isSelected)
+        self.likeButton.isEnabled = false
+        print("A intrat")
+        
+        let ref = Database.database().reference()
+        ref.child("posts").child(self.postId).observeSingleEvent(of: .value, with: {snapshot in
+//            print(snapshot)
+//            if !self.likeButton.isSelected {
                 if let post = snapshot.value as? [String: Any] {
-                    print(post)
-                    let likes = post["likes"] as? Double
-                    ref.updateChildValues(["likes": likes! + 1])
+                    let keyToPost = ref.child("posts").childByAutoId().key
+                    if (post["usersWhoLiked"] == nil) {
+                        let updateLikes: [String: Any] = ["usersWhoLiked/\(keyToPost)" : UserService.currentUser?.uid]
+                        print(updateLikes)
+                        ref.child("posts").child(self.postId).updateChildValues(updateLikes, withCompletionBlock: {(error, ref) in
+                            if error == nil {
+                                Database.database().reference().child("posts").child(self.postId).observeSingleEvent(of: .value, with: {snap in
+                                    if let properties = snap.value as? [String: Any] {
+                                        if let likes = properties["usersWhoLiked"] as? [String:Any] {
+                                            let count = likes.count
+                                            print(count)
+                                            self.nrOfLikesLabel.text = "\(count)"
+                                            let update = ["likes": count]
+                                            Database.database().reference().child("posts").child(self.postId).updateChildValues(update)
+                                            
+                                            self.likeButton.isSelected = true
+                                            self.likeButton.setImage(UIImage(named: "notification_icon_selected"), for: UIControl.State.normal)
+                                            self.likeButton.isEnabled = true
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                    } else {
+                    let peopleWhoLiked = (post["usersWhoLiked"] as! [String: String]).values
+                    if !peopleWhoLiked.contains(UserService.currentUser!.uid) {
+                    let updateLikes: [String: Any] = ["usersWhoLiked/\(keyToPost)" : UserService.currentUser?.uid]
+//                    print(updateLikes)
+                    ref.child("posts").child(self.postId).updateChildValues(updateLikes, withCompletionBlock: {(error, ref) in
+                        if error == nil {
+                            Database.database().reference().child("posts").child(self.postId).observeSingleEvent(of: .value, with: {snap in
+                                if let properties = snap.value as? [String: Any] {
+                                    if let likes = properties["usersWhoLiked"] as? [String:Any] {
+                                        let count = likes.count
+                                        print(count)
+                                        self.nrOfLikesLabel.text = "\(count)"
+                                        let update = ["likes": count]
+                                        Database.database().reference().child("posts").child(self.postId).updateChildValues(update)
+                                        
+                                        self.likeButton.isSelected = true
+                                        self.likeButton.setImage(UIImage(named: "notification_icon_selected"), for: UIControl.State.normal)
+                                        self.likeButton.isEnabled = true
+                                    }
+                                }
+                            })
+                        }
+                    })
+                  }
+                 else {
+                    print("A intrat aici acum")
+                    if let properties = snapshot.value as? [String: Any] {
+    //                    print(properties)
+                        if let usersWhoLiked = properties["usersWhoLiked"] as? [String: Any] {
+    //                        print(usersWhoLiked)
+                            for (id, users) in usersWhoLiked {
+    //                            print(id)
+    //                            print(users)
+                                if users as? String  == UserService.currentUser?.uid {
+    //                                print("E bine")
+                                    ref.child("posts").child(self.postId).child("usersWhoLiked").child(id).removeValue(completionBlock: {(error, ref) in
+                                        if error == nil {
+                                            Database.database().reference().child("posts").child(self.postId).observeSingleEvent(of: .value, with: {snap in
+//                                                print("bine 1")
+//                                                print(snap)
+//                                                print(snap.value)
+                                                if let prop = snap.value as? [String: Any] {
+//                                                    print("bine 2")
+                                                    print(prop)
+                                                    if let likes = prop["usersWhoLiked"] as? [String: Any] {
+//                                                        print("bine 3")
+                                                        let count = likes.count
+                                                        self.nrOfLikesLabel.text = "\(count)"
+                                                        Database.database().reference().child("posts").child(self.postId).updateChildValues(["likes": count])
+                                                    } else {
+//                                                        print("prost")
+                                                        self.nrOfLikesLabel.text = "0"
+                                                        Database.database().reference().child("posts").child(self.postId).updateChildValues(["likes": 0])
+                                                    }
+                                                }
+                                            })
+                                        } else {
+                                            print("Error")
+                                        }
+                                    })
+                                    self.likeButton.isSelected = false
+                                    self.likeButton.setImage(UIImage(named: "notification_icon"), for: UIControl.State.normal)
+                                    self.likeButton.isEnabled = true
+                                    break
+                                }
+                            }
+                        }
+                    }
                 }
-            })
-        } else {
-            likeButton.setImage(UIImage(named: "notification_icon"), for: UIControl.State.normal)
-            ref.observeSingleEvent(of: .value, with: { snapshot in
-                if let post = snapshot.value as? [String: Any] {
-                    print(post)
-                    let likes = post["likes"] as? Double
-                    ref.updateChildValues(["likes": likes! - 1])
-                }
-            })
-        }
-        print(likeButton.isSelected)
+              }
+            }
+            
+        })
+        ref.removeAllObservers()
         
     }
     

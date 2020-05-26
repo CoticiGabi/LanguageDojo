@@ -20,7 +20,6 @@ class HomeViewController: UITableViewController, editTextProtocol {
         animateIn(desiredView: popUpView)
         editPostTextView.text = textToEdit
         currentPost = post
-        
     }
     
     @IBOutlet weak var editPostTextView: UITextView!
@@ -153,7 +152,9 @@ class HomeViewController: UITableViewController, editTextProtocol {
             ],
             "editMessage": self.editPostTextView.text,
             "upvotes": self.upvotes,
-            "downvotes": self.downvotes
+            "downvotes": self.downvotes,
+            "peopleWhoUpvoted": [],
+            "peopleWhoDownvoted": []
         ] as [String: Any]
         
         editPostRef.setValue(editObject, withCompletionBlock: { error, ref in
@@ -202,12 +203,22 @@ class HomeViewController: UITableViewController, editTextProtocol {
                     let url = URL(string: profileImage),
                     let message = dict["message"] as? String,
                     let language = dict["language"] as? String,
-                    let nrOfLikes = dict["likes"] as? Int {
+                    let nrOfLikes = dict["likes"] as? Int
+                {
+
                     if uid != UserService.currentUser?.uid && language == UserService.currentUser?.masterLanguage{
                         let userProfile = User(uid: uid , username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
                         let currPost = Post(id: childSnapshot.key, message: message, author: userProfile, nrOfLikes: nrOfLikes, language: language)
+                        if let peopleWhoLiked = dict["usersWhoLiked"] as? [String: Any] {
+                            for (_, person) in peopleWhoLiked {
+                                currPost.usersWhoLiked.append(person as! String)
+                            }
+                        }
+                        print(currPost.usersWhoLiked)
 
                         tempPost.append(currPost)
+//                    print(usersWhoLiked)
+//                    print("Corect")
                     }
                 } else {
                     print("Error")
@@ -234,6 +245,13 @@ class HomeViewController: UITableViewController, editTextProtocol {
         cell.author = self.posts[indexPath.row].author
         cell.nrOfLikes = self.posts[indexPath.row].nrOfLikes
         cell.language = self.posts[indexPath.row].language
+        for person in self.posts[indexPath.row].usersWhoLiked {
+            if person == UserService.currentUser!.uid {
+                cell.likeButton.setImage(UIImage(named: "notification_icon_selected"), for: UIControl.State.normal)
+                break
+            }
+        }
+//        print(cell.usersWhoLiked)
         cell.delegate = self
         return cell
     }
@@ -246,6 +264,7 @@ class HomeViewController: UITableViewController, editTextProtocol {
         cell.textToEdit = self.posts[indexPath.row].message
         cell.author = self.posts[indexPath.row].author
         cell.nrOfLikes = self.posts[indexPath.row].nrOfLikes
+        cell.usersWhoLiked = self.posts[indexPath.row].usersWhoLiked
         let editTableViewController = self.storyboard?.instantiateViewController(identifier: "editViewController") as! EditTableViewController
         editTableViewController.modalPresentationStyle = .fullScreen
        self.present(editTableViewController, animated: true, completion: nil)

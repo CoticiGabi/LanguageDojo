@@ -15,6 +15,8 @@ class EditPost {
         var nrOfUpvotes: Int
         var nrOfDownvotes: Int
         var post: Post
+        var usersWhoUpvoted: [String] = [String]()
+        var usersWhoDownvoted: [String] = [String]()
         
         init(id: String, message: String, author: User, nrOfUpvotes: Int, nrOfDownvotes: Int, post: Post) {
             self.id = id

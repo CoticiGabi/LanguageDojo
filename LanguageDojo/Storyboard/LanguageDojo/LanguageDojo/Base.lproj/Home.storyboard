@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--LanguageDojo-->
         <scene sceneID="T89-a6-sdA">
             <objects>
                 <tableViewController storyboardIdentifier="Home" id="EAY-SG-MwX" customClass="HomeViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
@@ -162,7 +162,7 @@
                             <outlet property="delegate" destination="EAY-SG-MwX" id="vDJ-Qn-3Wz"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="sOd-Up-weA"/>
+                    <navigationItem key="navigationItem" title="LanguageDojo" id="sOd-Up-weA"/>
                     <connections>
                         <outlet property="blurView" destination="8bG-eB-DL3" id="fNo-in-d9S"/>
                         <outlet property="cancelBtn" destination="rL9-Sr-Kxl" id="E84-UZ-fgY"/>
@@ -277,7 +277,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l34-oS-2WI">
-                                                    <rect key="frame" x="59" y="173" width="36" height="25"/>
+                                                    <rect key="frame" x="59" y="148" width="36" height="50"/>
                                                     <state key="normal" image="notification_icon"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLn-Ir-5fM">
@@ -497,7 +497,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mv-Or-OK9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471.0144927536232" y="845.75892857142856"/>
+            <point key="canvasLocation" x="1322" y="846"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eEr-nh-weF">

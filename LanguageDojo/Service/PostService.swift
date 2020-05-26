@@ -24,7 +24,7 @@ class PostService {
                 let author = dict["author"] as? User,
                 let nrOfLikes = dict["likes"] as? Int,
                 let language = dict["language"] as? String{
-                    post = Post(id: uid, message: message, author: author, nrOfLikes: nrOfLikes, language: language)
+                post = Post(id: uid, message: message, author: author, nrOfLikes: nrOfLikes, language: language)
             }
             completion(post)
         })

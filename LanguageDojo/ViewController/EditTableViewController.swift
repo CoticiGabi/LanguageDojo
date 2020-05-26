@@ -12,6 +12,7 @@ import FirebaseDatabase
 
 class EditTableViewController: UITableViewController, editTextProtocol {
     
+    
     func editText(textToEdit: String!, post: Post!) {
         text = textToEdit
         originalPost = post
@@ -55,10 +56,10 @@ class EditTableViewController: UITableViewController, editTextProtocol {
         print("A intrat")
         let editRef = Database.database().reference().child("edits")
         editRef.observe(.value, with: { snapshot in
-            print(snapshot)
+//            print(snapshot)
             var tempEdits = [EditPost]()
             for child in snapshot.children {
-                print(child)
+//                print(child)
                 if let childSnapshot = child as? DataSnapshot,
                     let dict = childSnapshot.value as? [String: Any],
                     let editPost = dict["post"] as? [String: Any],
@@ -77,12 +78,23 @@ class EditTableViewController: UITableViewController, editTextProtocol {
                     let upvotes = dict["upvotes"] as? Int,
                     let downVotes = dict["downvotes"] as? Int
                 {
+                    let usersWhoLiked = [""]
                      let user = User(uid: authorUid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
                         let post = Post(id: uid, message: message, author: user, nrOfLikes: nrOfLikes, language: language)
                         let currentUser = UserService.currentUser
-                        let editPost = EditPost(id: childSnapshot.key, message: editMessage, author: currentUser!, nrOfUpvotes:    upvotes, nrOfDownvotes: downVotes, post: post)
+                        let editPost = EditPost(id: childSnapshot.key, message: editMessage, author: currentUser!, nrOfUpvotes: upvotes, nrOfDownvotes: downVotes, post: post)
+                    if let peopleWhoUpvoted = dict["usersWhoUpvoted"] as? [String: Any] {
+                        for (_, person) in peopleWhoUpvoted {
+                            editPost.usersWhoUpvoted.append(person as! String)
+                        }
+                    }
+                    if let peopleWhoDownvoted = dict["usersWhoDownvoted"] as? [String: Any] {
+                    for (_, person) in peopleWhoDownvoted {
+                        editPost.usersWhoDownvoted.append(person as! String)
+                        }
+                    }
                     tempEdits.append(editPost)
-                    print("Corect")
+//                    print("Corect")
                 } else {
                     print("Error")
                 }
@@ -116,6 +128,22 @@ class EditTableViewController: UITableViewController, editTextProtocol {
             let cell = tableView.dequeueReusableCell(withIdentifier: "editCell", for: indexPath) as! EditViewCell
             cell.setEditPost(editPost: editPosts[indexPath.row])
             cell.editId = self.editPosts[indexPath.row].id
+            cell.usersWhoUpvoted = self.editPosts[indexPath.row].usersWhoUpvoted
+            cell.usersWhoDownvoted = self.editPosts[indexPath.row].usersWhoDownvoted
+            for person in self.editPosts[indexPath.row].usersWhoUpvoted {
+                if person == UserService.currentUser!.uid {
+                    cell.editPostUpvotes.setTitleColor(.red, for: UIControl.State.normal)
+                    cell.editPostDownvotes.setTitleColor(.black, for: UIControl.State.normal)
+                    break
+                }
+            }
+            for person in self.editPosts[indexPath.row].usersWhoDownvoted {
+                if person == UserService.currentUser!.uid {
+                    cell.editPostDownvotes.setTitleColor(.red, for: UIControl.State.normal)
+                    cell.editPostUpvotes.setTitleColor(.black, for: UIControl.State.normal)
+                    break
+                }
+            }
             return cell
 //        }
     }

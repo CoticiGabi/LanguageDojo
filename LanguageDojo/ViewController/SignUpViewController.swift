@@ -81,7 +81,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                     let userRef = ref.child("users")
                     let uid = Auth?.user.uid
                     let newUserRef = userRef.child(uid!)
-                    newUserRef.setValue(["username": self.usernameTextField.text!, "email": self.emailTextField.text!, "profileImage":"", "posts": [], "masterLanguage": "", "apprenticeLanguage": ""])
+                    newUserRef.setValue(["username": self.usernameTextField.text!, "email": self.emailTextField.text!, "profileImage":"", "posts": [], "masterLanguage": "", "apprenticeLanguage": "", "score": 0])
                     let welcomeController = self.storyboard?.instantiateViewController(withIdentifier: "welcome") as! UIViewController
                     welcomeController.modalPresentationStyle = .fullScreen
                     self.present(welcomeController, animated: true, completion: nil)

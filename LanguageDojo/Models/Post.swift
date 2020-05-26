@@ -15,6 +15,7 @@ class Post {
 //    var timestamp: Double
     var nrOfLikes: Int
     var language: String
+    var usersWhoLiked: [String] = [String]()
     
     init(id: String, message: String, author: User, nrOfLikes: Int, language: String) {
         self.id = id
@@ -23,5 +24,6 @@ class Post {
 //        self.timestamp = timestamp
         self.nrOfLikes = nrOfLikes
         self.language = language
+//        self.usersWhoLiked = usersWhoLiked
     }
 }
