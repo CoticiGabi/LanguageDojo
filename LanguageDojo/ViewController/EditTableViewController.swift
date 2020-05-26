@@ -28,6 +28,13 @@ class EditTableViewController: UITableViewController, editTextProtocol {
         
         super.viewDidLoad()
         print("AAAAAAAAA")
+//        print(PostService.currentPost)
+        
+        // Gesture Recognizer
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+
+        self.view.addGestureRecognizer(swipeRight)
         
         var layoutGuide: UILayoutGuide!
         
@@ -49,6 +56,17 @@ class EditTableViewController: UITableViewController, editTextProtocol {
         tableView.reloadData()
 
         observeEdits()
+    }
+    
+    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+//        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+//        homeVC.modalPresentationStyle = .fullScreen
+//       self.present(homeVC, animated: true, completion: nil)
+        
+         let storyboard = UIStoryboard(name: "Start", bundle: nil)
+         let homeViewController = storyboard.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+        homeViewController.modalPresentationStyle = .fullScreen
+        self.present(homeViewController, animated: true, completion: nil)
     }
     
     func observeEdits() {
@@ -78,26 +96,28 @@ class EditTableViewController: UITableViewController, editTextProtocol {
                     let upvotes = dict["upvotes"] as? Int,
                     let downVotes = dict["downvotes"] as? Int
                 {
-                    let usersWhoLiked = [""]
-                     let user = User(uid: authorUid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
-                        let post = Post(id: uid, message: message, author: user, nrOfLikes: nrOfLikes, language: language)
-                        let currentUser = UserService.currentUser
-                        let editPost = EditPost(id: childSnapshot.key, message: editMessage, author: currentUser!, nrOfUpvotes: upvotes, nrOfDownvotes: downVotes, post: post)
-                    if let peopleWhoUpvoted = dict["usersWhoUpvoted"] as? [String: Any] {
-                        for (_, person) in peopleWhoUpvoted {
-                            editPost.usersWhoUpvoted.append(person as! String)
+                    if uid == PostService.currentPost!.id {
+                         let user = User(uid: authorUid, username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
+                            let post = Post(id: uid, message: message, author: user, nrOfLikes: nrOfLikes, language: language)
+                            let currentUser = UserService.currentUser
+                            let editPost = EditPost(id: childSnapshot.key, message: editMessage, author: currentUser!, nrOfUpvotes: upvotes, nrOfDownvotes: downVotes, post: post)
+                        if let peopleWhoUpvoted = dict["usersWhoUpvoted"] as? [String: Any] {
+                            for (_, person) in peopleWhoUpvoted {
+                                editPost.usersWhoUpvoted.append(person as! String)
+                            }
                         }
-                    }
-                    if let peopleWhoDownvoted = dict["usersWhoDownvoted"] as? [String: Any] {
-                    for (_, person) in peopleWhoDownvoted {
-                        editPost.usersWhoDownvoted.append(person as! String)
+                        if let peopleWhoDownvoted = dict["usersWhoDownvoted"] as? [String: Any] {
+                        for (_, person) in peopleWhoDownvoted {
+                            editPost.usersWhoDownvoted.append(person as! String)
+                            }
                         }
+                        tempEdits.append(editPost)
+    //                    print("Corect")
                     }
-                    tempEdits.append(editPost)
-//                    print("Corect")
                 } else {
-                    print("Error")
-                }
+                        print("Error")
+                        }
+                
             }
             self.editPosts = tempEdits
             self.tableView.reloadData()
@@ -134,6 +154,7 @@ class EditTableViewController: UITableViewController, editTextProtocol {
                 if person == UserService.currentUser!.uid {
                     cell.editPostUpvotes.setTitleColor(.red, for: UIControl.State.normal)
                     cell.editPostDownvotes.setTitleColor(.black, for: UIControl.State.normal)
+                    cell.editPostUpvotes.isEnabled = false
                     break
                 }
             }
@@ -141,6 +162,7 @@ class EditTableViewController: UITableViewController, editTextProtocol {
                 if person == UserService.currentUser!.uid {
                     cell.editPostDownvotes.setTitleColor(.red, for: UIControl.State.normal)
                     cell.editPostUpvotes.setTitleColor(.black, for: UIControl.State.normal)
+                    cell.editPostDownvotes.isEnabled = false
                     break
                 }
             }

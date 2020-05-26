@@ -70,12 +70,22 @@ class EditViewCell: UITableViewCell {
                                 if let upvotes = properties["usersWhoUpvoted"] as? [String:Any]
                                     {
 //                                    print("a intrat aici")
+                                        let editAuthor = properties["editAuthor"] as? [String: Any]
+                                        print(editAuthor!["score"] as! Int)
+                                        print(upvotes)
                                     let count = upvotes.count
 //                                    print(count)
                                     self.editPostNrOfUpvotes.text = "\(count)"
                                     let update = ["upvotes": count]
                                     Database.database().reference().child("edits").child(self.editId).updateChildValues(update)
-                                        
+                                        Database.database().reference().child("users").child(editAuthor!["uid"] as! String).observeSingleEvent(of: .value, with: {sn in
+                                            if let pr = sn.value as? [String: Any] {
+                                                if let score = pr["score"] as? Int {
+                                                    print(score)
+                                                    Database.database().reference().child("users").child(editAuthor!["uid"] as! String).updateChildValues(["score": score + 1])
+                                                }
+                                            }
+                                        })
                                     if let downvotes = properties["usersWhoDownvoted"] as? [String: Any] {
 //                                        print("AAAA")
                                         for (id, user) in downvotes {
@@ -158,6 +168,8 @@ class EditViewCell: UITableViewCell {
                                 if let downvotes = properties["usersWhoDownvoted"] as? [String:Any]
                                     {
 //                                    print("a intrat aici")
+                                    let editAuthor = properties["editAuthor"] as? [String: Any]
+
                                     let count = downvotes.count
 //                                    print(count)
                                     self.editPostNrOfDownvotes.text = "\(count)"
@@ -165,6 +177,13 @@ class EditViewCell: UITableViewCell {
                                         
                                         
                                     Database.database().reference().child("edits").child(self.editId).updateChildValues(update)
+                                        Database.database().reference().child("users").child(editAuthor!["uid"] as! String).observeSingleEvent(of: .value, with: {sn in
+                                            if let pr = sn.value as? [String: Any] {
+                                                if let score = pr["score"] as? Int {
+                                                    Database.database().reference().child("users").child(editAuthor!["uid"] as! String).updateChildValues(["score": score - 1])
+                                                }
+                                            }
+                                        })
                                     if let upvotes = properties["usersWhoUpvoted"] as? [String: Any] {
 //                                        print("AAAA")
                                         for (id, user) in upvotes {

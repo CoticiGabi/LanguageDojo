@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="167" y="846"/>
         </scene>
-        <!--Edit Table View Controller-->
+        <!--LanguageDojo-->
         <scene sceneID="M53-wj-bWf">
             <objects>
-                <tableViewController storyboardIdentifier="editViewController" id="Psr-Un-fyh" customClass="EditTableViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="editViewController" title="LanguageDojo" id="Psr-Un-fyh" customClass="EditTableViewController" customModule="LanguageDojo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hm7-iX-cdh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -277,7 +277,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l34-oS-2WI">
-                                                    <rect key="frame" x="59" y="148" width="36" height="50"/>
+                                                    <rect key="frame" x="59" y="173" width="36" height="25"/>
                                                     <state key="normal" image="notification_icon"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLn-Ir-5fM">
@@ -494,8 +494,14 @@
                             <outlet property="delegate" destination="Psr-Un-fyh" id="sqv-Oi-9ol"/>
                         </connections>
                     </tableView>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6mv-Or-OK9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I9q-Wa-rux">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="Button"/>
+                </button>
             </objects>
             <point key="canvasLocation" x="1322" y="846"/>
         </scene>

@@ -18,7 +18,6 @@ class User {
     var masterLanguage: String
     var apprenticeLanguage: String
     var score: Int = 0
-    
     init(uid: String, username: String, email: String, profileImage: String, masterLanguage: String, apprenticeLanguage: String) {
         self.uid = uid
         self.username = username

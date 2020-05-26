@@ -150,6 +150,7 @@ class HomeViewController: UITableViewController, editTextProtocol {
                     "email": currentPost.author.email
                 ]
             ],
+            "editAuthor": ["uid" : UserService.currentUser!.uid, "score": UserService.currentUser!.score],
             "editMessage": self.editPostTextView.text,
             "upvotes": self.upvotes,
             "downvotes": self.downvotes,
@@ -206,7 +207,7 @@ class HomeViewController: UITableViewController, editTextProtocol {
                     let nrOfLikes = dict["likes"] as? Int
                 {
 
-                    if uid != UserService.currentUser?.uid && language == UserService.currentUser?.masterLanguage{
+                    if uid != UserService.currentUser?.uid && language == UserService.currentUser?.masterLanguage {
                         let userProfile = User(uid: uid , username: username, email: email, profileImage: profileImage, masterLanguage: masterLanguage, apprenticeLanguage: apprenticeLanguage)
                         let currPost = Post(id: childSnapshot.key, message: message, author: userProfile, nrOfLikes: nrOfLikes, language: language)
                         if let peopleWhoLiked = dict["usersWhoLiked"] as? [String: Any] {
@@ -265,6 +266,13 @@ class HomeViewController: UITableViewController, editTextProtocol {
         cell.author = self.posts[indexPath.row].author
         cell.nrOfLikes = self.posts[indexPath.row].nrOfLikes
         cell.usersWhoLiked = self.posts[indexPath.row].usersWhoLiked
+        cell.language = self.posts[indexPath.row].language
+//        print(cell.postId)
+//        print(cell.textToEdit)
+//        print(cell.author)
+//        print(cell.nrOfLikes)
+//        print(cell.language)
+        PostService.currentPost = Post(id: cell.postId, message: cell.textToEdit, author: cell.author, nrOfLikes: cell.nrOfLikes, language: cell.language)
         let editTableViewController = self.storyboard?.instantiateViewController(identifier: "editViewController") as! EditTableViewController
         editTableViewController.modalPresentationStyle = .fullScreen
        self.present(editTableViewController, animated: true, completion: nil)

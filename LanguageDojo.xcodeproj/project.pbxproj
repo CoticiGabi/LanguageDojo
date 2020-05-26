@@ -32,6 +32,8 @@
 		06A585822476AA1A0015C944 /* EditViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585812476AA1A0015C944 /* EditViewCell.swift */; };
 		06A585842476B2E90015C944 /* EditPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585832476B2E90015C944 /* EditPost.swift */; };
 		06A585862476B70B0015C944 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A585852476B70B0015C944 /* PostService.swift */; };
+		06C4201D247DBBFB007D88B3 /* RankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C4201C247DBBFB007D88B3 /* RankingTableViewCell.swift */; };
+		06C4201F247DBCBF007D88B3 /* RankPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C4201E247DBCBF007D88B3 /* RankPost.swift */; };
 		06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */; };
 		06FFA984246EC29E00C5A359 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FFA983246EC29E00C5A359 /* Post.swift */; };
 		B9CF9AC5C410656967F2BF6C /* Pods_LanguageDojo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */; };
@@ -65,6 +67,8 @@
 		06A585812476AA1A0015C944 /* EditViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewCell.swift; sourceTree = "<group>"; };
 		06A585832476B2E90015C944 /* EditPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPost.swift; sourceTree = "<group>"; };
 		06A585852476B70B0015C944 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
+		06C4201C247DBBFB007D88B3 /* RankingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingTableViewCell.swift; sourceTree = "<group>"; };
+		06C4201E247DBCBF007D88B3 /* RankPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankPost.swift; sourceTree = "<group>"; };
 		06FF7F872468095400EFB8B0 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		06FFA983246EC29E00C5A359 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		1584F73DDB752707B500C3CD /* Pods_LanguageDojo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguageDojo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +102,7 @@
 				06A585772474139D0015C944 /* PostTableViewCell.swift */,
 				06A585782474139D0015C944 /* PostTableViewCell.xib */,
 				06A585812476AA1A0015C944 /* EditViewCell.swift */,
+				06C4201C247DBBFB007D88B3 /* RankingTableViewCell.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				06FFA983246EC29E00C5A359 /* Post.swift */,
 				06A585722472C3480015C944 /* User.swift */,
 				06A585832476B2E90015C944 /* EditPost.swift */,
+				06C4201E247DBCBF007D88B3 /* RankPost.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 			files = (
 				06A585842476B2E90015C944 /* EditPost.swift in Sources */,
 				06FF7F882468095400EFB8B0 /* WelcomeViewController.swift in Sources */,
+				06C4201D247DBBFB007D88B3 /* RankingTableViewCell.swift in Sources */,
 				069F4DE1245D4BF600EE6C6E /* HomeViewController.swift in Sources */,
 				06A585792474139D0015C944 /* PostTableViewCell.swift in Sources */,
 				06A5857E2476A90A0015C944 /* EditTableViewController.swift in Sources */,
@@ -324,6 +331,7 @@
 				069F4DDD245B029200EE6C6E /* SignInViewController.swift in Sources */,
 				06FFA984246EC29E00C5A359 /* Post.swift in Sources */,
 				06A585822476AA1A0015C944 /* EditViewCell.swift in Sources */,
+				06C4201F247DBCBF007D88B3 /* RankPost.swift in Sources */,
 				06A585732472C3480015C944 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
